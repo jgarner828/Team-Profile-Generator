@@ -3,7 +3,8 @@ const Employee =  require('./lib/Employee');
 const Manager =  require('./lib/Manager');
 const Engineer =  require('./lib/Engineer');
 const Intern =  require('./lib/Intern');
-// TODO: need to select what type of employee you are going to add. need to generate the list of questions based on what you select. need to save the employee to an array of employees. need to determine if you want to add more employees (show current list), then when you submit the list of employees is renders a page to the /dist directory
+const parsePage = require('./parsePage');
+
 
 const employeeRole = { 
                     type: 'list',
@@ -106,7 +107,7 @@ const internBank = [
     {
         type: 'input',
         name: 'name',
-        message: "What is the name of the manager?",
+        message: "What is the name of the intern?",
         validate: function(answer) {
         if(answer.length < 1) {
             return console.log('You must enter in a name.')
@@ -117,7 +118,7 @@ const internBank = [
     {
         type: 'input',
         name: 'id',
-        message: "What is the ID number for this manager?",
+        message: "What is the ID number for this intern?",
         validate: function(answer) {
         if(answer.length < 1) {
             return console.log('You must enter in an id number.')
@@ -128,7 +129,7 @@ const internBank = [
     {
         type: 'input',
         name: 'email',
-        message: "What is the email address for this manager??",
+        message: "What is the email address for this intern??",
         validate: function(answer) {
         if(answer.length < 1) {
             return console.log('You must enter in an email.')
@@ -149,7 +150,9 @@ const internBank = [
     },
 ];
 
-const teamMembers = [];
+const managers = [];
+const engineers = [];
+const interns = [];
 
 
 function addEmployee() {
@@ -168,20 +171,16 @@ function addEmployee() {
     })
 }
 
-function addNextEmployee() {
-    // TODO: need to check if you want to continue adding more employees or push the teamMembers array to be rendered
-}
-
 
 function init(response) {
-
     if (response === 'Manager') {
         Inquirer
             .prompt(managerBank)
 
             .then( (response) => {
-                const newTeamMember = new Manager(response.name, response.id, response.email, response.officephone);
-                console.log(newTeamMember);
+                const newManager = new Manager(response.name, response.id, response.email, response.officephone);
+                managers.push(newManager);
+                addNextEmployee()
                 return;
             })
 
@@ -196,7 +195,8 @@ function init(response) {
 
             .then( (response) => {
                 const newEngineer = new Engineer(response.name, response.id, response.email, response.github);
-                console.log(newEngineer);
+                engineers.push(newEngineer);
+                addNextEmployee()
                 return;
             })
 
@@ -211,7 +211,8 @@ function init(response) {
 
             .then( (response) => {
                 const newIntern = new Intern(response.name, response.id, response.email, response.school);
-                console.log(newIntern);
+                interns.push(newIntern);
+                addNextEmployee()
                 return;
             })
 
@@ -221,8 +222,29 @@ function init(response) {
             })
     }
 
-    addNextEmployee();
 
 }
+
+
+function addNextEmployee() {
+
+   Inquirer
+        .prompt({ 
+            type: 'list',
+            name: 'addnext',
+            message: "Would you like to add another team member?",
+            choices: ['Yes', 'No']
+        })
+
+        .then( (response) => {
+            if (response.addnext === 'Yes') {
+                addEmployee();
+            }
+            if (response.addnext === 'No') {
+                parsePage(managers, engineers, interns);
+            }
+        })
+}
+
 
 addEmployee() 
