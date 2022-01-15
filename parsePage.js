@@ -84,7 +84,7 @@ function parsePage(managers, engineers, interns) {
    console.log(html);
 
    console.log('fs write file next');
-   fs.writeFile('index.html', html, (err) => {
+   fs.writeFile('./dist/index.html', html, (err) => {
        if (err) console.log(err);
        if (!err) console.log('success');
    });
