@@ -10,13 +10,13 @@ function parsePage(managers, engineers, interns) {
     managers.forEach( (manager) => {
         let card = `<div class='manager container-fluid d-flex p-1 m-1'>
         <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title text-center">${manager.name}</h5>
+            <div class="card-body bg-success bg-gradient">
+              <h5 class="card-title text-center fw-bolder">${manager.name}</h5>
               <p class="card-text text-center">Manager</p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item text-center">${manager.id}</li>
-              <li class="list-group-item text-center"><a href="${manager.email}" class="card-link">${manager.email}</a></li>
+              <li class="list-group-item text-center">Id: ${manager.id}</li>
+              <li class="list-group-item text-center"><a href="${manager.email}" class="card-link text-decoration-none">${manager.email}</a></li>
               <li class="list-group-item text-center">${manager.officephone}</li>
             </ul>
         </div>
@@ -32,14 +32,14 @@ function parsePage(managers, engineers, interns) {
     engineers.forEach( (engineer) => {
         let card = `<div class='engineer container-fluid d-flex p-1 m-1'>
         <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title text-center">${engineer.name}</h5>
+            <div class="card-body bg-primary bg-gradient">
+              <h5 class="card-title text-center fw-bolder">${engineer.name}</h5>
               <p class="card-text text-center">Engineer</p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item text-center">${engineer.id}</li>
-              <li class="list-group-item text-center"><a href="${engineer.email}" class="card-link">${engineer.email}</a></li>
-              <li class="list-group-item text-center"><a href="${engineer.github}" class="card-link">${engineer.github}</a></li>
+              <li class="list-group-item text-center">Id: ${engineer.id}</li>
+              <li class="list-group-item text-center"><a href="${engineer.email}" class="card-link text-decoration-none">${engineer.email}</a></li>
+              <li class="list-group-item text-center"><a href="${engineer.github}" class="card-link text-decoration-none">${engineer.github}</a></li>
             </ul>
         </div>
     </div>`
@@ -55,14 +55,14 @@ function parsePage(managers, engineers, interns) {
         console.log(intern.name)
         let card = `<div class='intern container-fluid d-flex p-1 m-1'>
         <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title text-center">${intern.name}</h5>
+            <div class="card-body bg-success bg-gradient">
+              <h5 class="card-title text-center fw-bolder">${intern.name}</h5>
               <p class="card-text text-center">Intern</p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item text-center">${intern.id}</li>
-              <li class="list-group-item text-center"><a href="${intern.email}" class="card-link">${intern.email}</a></li>
-              <li class="list-group-item text-center"><a href="${intern.school}" class="card-link">${intern.school}</a></li>
+              <li class="list-group-item text-center">Id: ${intern.id}</li>
+              <li class="list-group-item text-center"><a href="${intern.email}" class="card-link text-decoration-none">${intern.email}</a></li>
+              <li class="list-group-item text-center">${intern.school}</li>
             </ul>
         </div>
     </div>`
@@ -111,8 +111,10 @@ function createHTML(cards) {
     <body class='container-fluid d-flex flex-column p-0 '>
     
         <h1 class='border text-center'>Team Profiles</h1>
-    
+
+        <div class='container d-flex'>
         ${cards}
+        </div>
     
         
     </body>
