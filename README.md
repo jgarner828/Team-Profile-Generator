@@ -16,6 +16,12 @@
 ## Usage
 
 **Install required Node modules. In terminal run the command 'node index.js'.**
+
+
+
+https://user-images.githubusercontent.com/90808889/149642511-077c1086-0833-4a67-b0a0-c1d5c2c02f5a.mp4
+
+
   
 ## License
   
